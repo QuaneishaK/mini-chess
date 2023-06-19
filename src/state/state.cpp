@@ -13,7 +13,19 @@
  */
 int State::evaluate(){
   // [TODO] design your own evaluation function
-  return 0;
+  int piece_value[] = {0, 2, 6, 7, 8, 20, 200};
+  int score_black = 0;
+  int score_white = 0;
+  for(int i = 0 ; i< BOARD_H ; i++){
+    for(int j = 0 ; j< BOARD_W ; j++){
+      int chess = board.board[0][i][j];
+      score_white += piece_value[chess];
+      chess = board.board[1][i][j];
+      score_black += piece_value[chess];
+    }
+  }
+  int ret = score_white - score_black;
+  return ret;
 }
 
 
