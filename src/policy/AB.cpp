@@ -57,24 +57,30 @@ Move ab::get_move(State *state, int depth){
     auto actions = state->legal_actions;
 
     if(!state->player){
-        int value = -1000;
+        //int value = -1000;
         for(auto child : actions){
             State *childState = state->next_state(child);
             int temp = alphabeta(childState, depth-1, 0, alpha, beta);
-            if(temp > value){
-                value = temp;
+            if(temp > alpha){
+                alpha = temp;
                 move = child;
+            }
+            if(alpha >= beta){
+                break;
             }
         }
     }
     else{
-        int value = 1000;
+        //int value = 1000;
         for(auto child : actions){
             State *childState = state->next_state(child);
             int temp = alphabeta(childState, depth-1, 1, alpha, beta);
-            if(temp < value){
-                value = temp;
+            if(temp < beta){
+                beta = temp;
                 move = child;
+            }
+            if(alpha >= beta){
+                break;
             }
         }
     }
